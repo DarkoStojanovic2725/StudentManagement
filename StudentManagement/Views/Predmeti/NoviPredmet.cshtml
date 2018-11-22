@@ -1,0 +1,33 @@
+﻿@model StudentManagement.ViewModels.PredmetFormViewModel
+
+@{
+         ViewBag.Title = Model.Title;
+         Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Title</h2>
+@using (Html.BeginForm("Sacuvaj", "Predmeti"))
+{
+    <div class="form-group">
+        @Html.LabelFor(i => i.userId)
+        @Html.DropDownListFor(i => i.userId, new SelectList(Model.applicationUsers, "Id", "Email"), "Izaberi profesora", new { @class = "form-control" })
+        @Html.ValidationMessageFor(i => i.userId)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(i => i.espb)
+        @Html.TextBoxFor(i => i.espb, new { @class = "form-control" })
+        @Html.ValidationMessageFor(i => i.espb)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(i => i.naziv)
+        @Html.TextBoxFor(i => i.naziv, new { @class = "form-control" })
+        @Html.ValidationMessageFor(i => i.naziv)
+    </div>
+
+    @Html.HiddenFor(i => i.id)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Sacuvaj</button>
+}
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

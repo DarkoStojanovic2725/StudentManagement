@@ -1,0 +1,65 @@
+﻿@model IEnumerable<StudentManagement.Models.Ispit>
+@{
+    ViewBag.Title = "Ispiti";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ispiti</h2>
+<p>
+    @Html.ActionLink("Novi ispit", "NoviIspit", "Ispiti", null, new { @class = "btn btn-primary" })
+</p>
+@if (!Model.Any())
+{
+    <p>Nema ispita!</p>
+}
+else
+{
+    <table id="ispiti" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Predmet</th>
+                <th>Datum ispita</th>
+                <th>Brisanje</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ispit in Model)
+            {
+            <tr>
+                <td>@Html.ActionLink(ispit.predmet.naziv, "Izmeni", "Ispiti", new { id = ispit.id }, null)</td>
+                <td>@ispit.datumIspita</td>
+
+                <td>
+                    <button data-ispit-id="@ispit.id" class="btn-link js-delete">Obrisi</button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            var table = $("#ispiti").DataTable();
+
+            $("#ispiti").on("click", ".js-delete", function () {
+                var btn = $(this);
+                bootbox.confirm("Da li ste sigurni da zelite da obrisete ispit, brisete automatski polaganja za izabrani ispit?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/ispiti/" + btn.attr("data-ispit-id"),
+                            method: "DELETE",
+                            success: function () {
+                                console.log("uspesno");
+                                table.row(btn.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+

@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Student Management Sistem</h1>
+    <p class="lead">Sistem za upravljanje podacima vezanim za studente fakulteta.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Studenti</h2>
+        <p>
+           Lista svih studenata.
+        </p>
+        <p>@Html.ActionLink("Studenti", "Studenti", "Home")</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Predmeti</h2>
+        <p>Pregled predmeta i informacija.</p>
+        <p>@Html.ActionLink("Predmeti", "Index", "Predmeti")</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Prijava ispita</h2>
+        <p>Klikom na dugme ispod idete na prijavljivanje ispita. Potrebno je izabrati studenta i ispit.</p>
+        <p>@Html.ActionLink("Prijavi ispit", "NovoPolaganje", "Polaganje")</p>
+    </div>
+</div>

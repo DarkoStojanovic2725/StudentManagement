@@ -1,0 +1,87 @@
+﻿@model IEnumerable<StudentManagement.Models.Polaganje>
+@{
+    ViewBag.Title = "PolozeniIspiti";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Polozeni ispiti</h2>
+@if (!Model.Any())
+{
+    <p>Nema polaganja!</p>
+}
+else
+{
+    <div class="container">
+        <form action="" class="form-group">
+            <div class="form-group">
+                @Html.Label("Pocetni datum")
+                <input type="date" id="pocetniDatum" class="form-control" name="pocetniDatum">
+            </div>
+            <div class="form-group">
+                @Html.Label("Krajnji datum")
+                <input type="date" id="krajnjiDatum" class="form-control" name="krajnjiDatum">
+            </div>
+        </form>
+
+        <hr />
+
+        <table id="polozeniIspiti" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Ocena</th>
+                    <th>Broj pokusaja</th>
+                    <th>Broj bodova</th>
+                    <td>Polozio?</td>
+                    <td>Naziv predmeta</td>
+                    <td>Datum ispita</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var polaganje in Model)
+                {
+                    <tr>
+                        <td>@polaganje.student.Email</td>
+                        <td>@polaganje.ocena</td>
+                        <td>@polaganje.brojPokusaja</td>
+                        <td>@polaganje.brojBodova</td>
+                        <td>@polaganje.polozio</td>
+                        <td>@polaganje.ispit.predmet.naziv</td>
+                        <td>@polaganje.ispit.datumIspita</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+@section scripts{
+    <script>
+        $.fn.dataTable.ext.search.push(
+            function (settings, data, dataIndex) {
+                var pocetniDatum = new Date($('#pocetniDatum').val());
+                var krajnjiDatum = new Date($('#krajnjiDatum').val());
+                var datumIspita = new Date(data[6]) || 0; //sesta kolona za datum ispita
+
+                if ((isNaN(pocetniDatum) && isNaN(krajnjiDatum)) ||
+                    (isNaN(pocetniDatum) && datumIspita <= krajnjiDatum) ||
+                    (pocetniDatum <= datumIspita && isNaN(krajnjiDatum)) ||
+                    (pocetniDatum <= datumIspita && datumIspita <= krajnjiDatum)) {
+                    return true;
+                }
+                return false;
+            }
+        );
+
+        $(document).ready(function () {
+
+            var table = $("#polozeniIspiti").DataTable();
+
+            $('#pocetniDatum, #krajnjiDatum').change(function () {
+                table.draw();
+            });
+
+        });
+    </script>
+}
+
+
