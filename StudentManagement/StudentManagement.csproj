@@ -257,6 +257,10 @@
     <Compile Include="Migrations\201811191416217_ToEnableUpdate.Designer.cs">
       <DependentUpon>201811191416217_ToEnableUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901052344131_UpdatePolaganje.cs" />
+    <Compile Include="Migrations\201901052344131_UpdatePolaganje.Designer.cs">
+      <DependentUpon>201901052344131_UpdatePolaganje.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -271,6 +275,8 @@
     <Compile Include="ViewModels\PredmetFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap-flatly.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -430,6 +436,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -514,6 +522,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -605,6 +617,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811191416217_ToEnableUpdate.resx">
       <DependentUpon>201811191416217_ToEnableUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901052344131_UpdatePolaganje.resx">
+      <DependentUpon>201901052344131_UpdatePolaganje.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

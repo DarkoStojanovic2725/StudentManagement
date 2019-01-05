@@ -8,25 +8,25 @@
 <h2>Prijavi ispit</h2>
 @using (Html.BeginForm("Sacuvaj", "Polaganje"))
 {
-<div class="form-group">
-    @Html.LabelFor(p => p.ispiti)
-    @Html.DropDownListFor(p => p.ispitId,
-    new SelectList(Model.ispiti, "id", "nazivDatum"), "Izaberi predmet", new { @class = "form-control" })
+    <div class="form-group">
+        @Html.LabelFor(p => p.ispiti)
+        @Html.DropDownListFor(p => p.ispitId,
+        new SelectList(Model.ispiti, "id", "nazivDatum"), "Izaberi predmet", new { @class = "form-control" })
 
-    @*@Html.DropDownListFor(p => p.ispitId,
-    new SelectList(Model.ispiti, "id", "nazivDatum"), "Izaberi predmet", new { @class = "form-control" })*@
+        @*@Html.DropDownListFor(p => p.ispitId,
+            new SelectList(Model.ispiti, "id", "nazivDatum"), "Izaberi predmet", new { @class = "form-control" })*@
 
-    @Html.ValidationMessageFor(i => i.ispitId)
-</div>
-<div class="form-group">
-    @Html.LabelFor(p => p.studenti)
-    @Html.DropDownListFor(p => p.studentId, new SelectList(Model.studenti, "id", "Email"), "Izaberi studenta", new { @class = "form-control" })
-    @Html.ValidationMessageFor(p => p.studenti)
-</div>
+        @Html.ValidationMessageFor(i => i.ispitId)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(p => p.studenti)
+        @Html.DropDownListFor(p => p.studentId, new SelectList(Model.studenti, "id", "Email"), "Izaberi studenta", new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.studenti)
+    </div>
 
 
     @Html.HiddenFor(p => p.id)
-    @Html.AntiForgeryToken()
+    @*Html.AntiForgeryToken()*@
     <button type="submit" class="btn btn-primary">Sacuvaj</button>
 }
 @section scripts {

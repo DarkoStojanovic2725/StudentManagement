@@ -14,15 +14,16 @@ namespace StudentManagement.ViewModels
         public IEnumerable<ApplicationUser> studenti { get; set; }
         [Display(Name = "Ispiti")]
         public IEnumerable<Ispit> ispiti { get; set; }
-        public int? id { get; set; }
+        public int id { get; set; }
         [Display(Name = "Ocena")]
-        public int ocena { get; set; }
+        [Range(5, 10)]
+        public int? ocena { get; set; }
         [Display(Name = "Broj bodova")]
-        public int brojBodova { get; set; }
+        public int? brojBodova { get; set; }
         [Display(Name = "Broj pokusaja")]
-        public int brojPokusaja { get; set; }
+        public int? brojPokusaja { get; set; }
         [Display(Name = "Polozio")]
-        public bool polozio { get; set; }
+        public bool? polozio { get; set; }
         [Required]
         [Display(Name = "Email studenta")]
         public string studentId { get; set; }

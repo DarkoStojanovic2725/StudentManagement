@@ -50,13 +50,20 @@ namespace StudentManagement.Controllers
                 .Include(c => c.ispit.predmet)
                 .Where(p => p.studentId == idStudenta).ToList();
 
+            var brojPolozenihIspita = _context.polaganja
+                .Include(s => s.student)
+                .Where(s => s.studentId == idStudenta && s.ocena > 5).Count();
+
+            ViewBag.BrojPolozenih = brojPolozenihIspita;
+
             return View(ispiti);
         }
         [Authorize(Roles = "Student")]
         public ActionResult NovoPolaganje() {
 
+            var user = HttpContext.User.Identity.Name;
             var studenti = _context.Users
-                .Where(u => u.Roles.Any(r => r.RoleId == getRole))
+                .Where(u => u.Roles.Any(r => r.RoleId == getRole) && u.Email == user)
                 .ToList();
             var ispiti = _context.ispiti
                 .Include(p => p.predmet)
@@ -77,15 +84,18 @@ namespace StudentManagement.Controllers
                 .Include(s => s.student)
                 .Include(p => p.ispit)
                 .Include(c => c.ispit.predmet)
-                .Where(p => p.polozio == true && p.ispit.predmet.userId == idProfesora)
+                .Where(p => p.ocena > 5 && p.ispit.predmet.userId == idProfesora)
                 .ToList();
 
+            var profesor = _context.Users.SingleOrDefault(p => p.Id == idProfesora).Email;
+
+            ViewBag.Profesor = profesor;
             return View(ispiti);
         }
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Sacuvaj(Polaganje polaganje) {
             if (!ModelState.IsValid)
             {
@@ -107,7 +117,7 @@ namespace StudentManagement.Controllers
                 polaganjeUBazi.ocena = polaganje.ocena;
                 polaganjeUBazi.brojBodova = polaganje.brojBodova;
                 polaganjeUBazi.brojPokusaja = polaganje.brojPokusaja;
-                polaganjeUBazi.polozio = polaganje.polozio;
+                polaganjeUBazi.polozio = polaganje.ocena > 5 ? true : false;
 
                 polaganjeUBazi.studentId = polaganje.studentId;
                 polaganjeUBazi.ispitId = polaganje.ispitId;
