@@ -13,9 +13,6 @@
         @Html.DropDownListFor(p => p.ispitId,
         new SelectList(Model.ispiti, "id", "nazivDatum"), "Izaberi predmet", new { @class = "form-control" })
 
-        @*@Html.DropDownListFor(p => p.ispitId,
-            new SelectList(Model.ispiti, "id", "nazivDatum"), "Izaberi predmet", new { @class = "form-control" })*@
-
         @Html.ValidationMessageFor(i => i.ispitId)
     </div>
     <div class="form-group">
@@ -26,7 +23,7 @@
 
 
     @Html.HiddenFor(p => p.id)
-    @*Html.AntiForgeryToken()*@
+    @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Sacuvaj</button>
 }
 @section scripts {

@@ -274,3 +274,4 @@ C:\Users\darko\Documents\GitHub\StudentManagement\StudentManagement\obj\Debug\St
 C:\Users\darko\Documents\GitHub\StudentManagement\StudentManagement\obj\Debug\StudentManagement.csproj.CopyComplete
 C:\Users\darko\Documents\GitHub\StudentManagement\StudentManagement\obj\Debug\StudentManagement.dll
 C:\Users\darko\Documents\GitHub\StudentManagement\StudentManagement\obj\Debug\StudentManagement.pdb
+C:\Users\darko\Documents\GitHub\StudentManagement\StudentManagement\obj\Debug\StudentManagement.csprojAssemblyReference.cache

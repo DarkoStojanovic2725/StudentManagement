@@ -95,7 +95,7 @@ namespace StudentManagement.Controllers
 
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public ActionResult Sacuvaj(Polaganje polaganje) {
             if (!ModelState.IsValid)
             {
