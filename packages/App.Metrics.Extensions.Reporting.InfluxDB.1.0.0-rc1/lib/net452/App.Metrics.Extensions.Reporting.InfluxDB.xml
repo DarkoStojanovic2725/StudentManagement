@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>App.Metrics.Extensions.Reporting.InfluxDB</name>
+    </assembly>
+    <members>
+        <member name="M:App.Metrics.Extensions.Reporting.InfluxDB.InfluxDBReporterSettings.#ctor">
+            <summary>
+                Initializes a new instance of the <see cref="T:App.Metrics.Extensions.Reporting.InfluxDB.InfluxDBReporterSettings" /> class.
+            </summary>
+        </member>
+        <member name="P:App.Metrics.Extensions.Reporting.InfluxDB.InfluxDBReporterSettings.HttpPolicy">
+            <summary>
+                Gets or sets the HTTP policy settings which allows circuit breaker configuration to be adjusted
+            </summary>
+            <value>
+                The HTTP policy.
+            </value>
+        </member>
+        <member name="P:App.Metrics.Extensions.Reporting.InfluxDB.InfluxDBReporterSettings.InfluxDbSettings">
+            <summary>
+                Gets or sets the influx database settings.
+            </summary>
+            <value>
+                The influx database settings.
+            </value>
+        </member>
+        <member name="P:App.Metrics.Extensions.Reporting.InfluxDB.InfluxDBReporterSettings.MetricNameFormatter">
+            <summary>
+                Gets or sets the metric name formatter func which takes the metric context and name and returns a formatted string
+                which will be reported to influx as the measurement
+            </summary>
+            <value>
+                The metric name formatter.
+            </value>
+        </member>
+        <member name="P:App.Metrics.Extensions.Reporting.InfluxDB.InfluxDBReporterSettings.ReportInterval">
+            <summary>
+                Gets or sets the report interval for which to flush metrics to influxdb.
+            </summary>
+            <value>
+                The report interval.
+            </value>
+        </member>
+        <member name="P:App.Metrics.Extensions.Reporting.InfluxDB.Client.InfluxDBSettings.BaseAddress">
+            <summary>
+                Gets or sets the InfluxDB host.
+            </summary>
+            <value>
+                The InfluxDB host.
+            </value>
+        </member>
+        <member name="P:App.Metrics.Extensions.Reporting.InfluxDB.Client.InfluxDBSettings.Consistenency">
+            <summary>
+                Gets or sets the number of InfluxDB notes that must confirm the write
+            </summary>
+            <value>
+                The InfluxDB node write consistency.
+            </value>
+        </member>
+        <member name="P:App.Metrics.Extensions.Reporting.InfluxDB.Client.InfluxDBSettings.Database">
+            <summary>
+                Gets or sets the InfluxDB database name where metrics will be persisted.
+            </summary>
+            <value>
+                The InfluxDB database name.
+            </value>
+        </member>
+        <member name="P:App.Metrics.Extensions.Reporting.InfluxDB.Client.InfluxDBSettings.Endpoint">
+            <summary>
+                Gets formatted endpoint for writes to InfluxDB
+            </summary>
+            <value>
+                The InfluxDB endpoint for writes.
+            </value>
+        </member>
+        <member name="P:App.Metrics.Extensions.Reporting.InfluxDB.Client.InfluxDBSettings.Password">
+            <summary>
+                Gets or sets the InfluxDB database password.
+            </summary>
+            <value>
+                The InfluxDB database password.
+            </value>
+        </member>
+        <member name="P:App.Metrics.Extensions.Reporting.InfluxDB.Client.InfluxDBSettings.RetensionPolicy">
+            <summary>
+                Gets or sets the InfluxDB database's retention policy to target.
+            </summary>
+            <value>
+                The InfluxDB database's retention policy to target.
+            </value>
+        </member>
+        <member name="P:App.Metrics.Extensions.Reporting.InfluxDB.Client.InfluxDBSettings.UserName">
+            <summary>
+                Gets or sets the InfluxDB database username.
+            </summary>
+            <value>
+                The InfluxDB database username.
+            </value>
+        </member>
+    </members>
+</doc>
