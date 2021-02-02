@@ -345,15 +345,15 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\Api\IspitiController.cs" />
+    <Compile Include="Controllers\Api\ExamController.cs" />
     <Compile Include="Controllers\Api\PredmetiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\IspitiController.cs" />
+    <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PolaganjeController.cs" />
     <Compile Include="Controllers\PredmetiController.cs" />
-    <Compile Include="Dtos\IspitDto.cs" />
-    <Compile Include="Dtos\PredmetDto.cs" />
+    <Compile Include="Dtos\ExamDro.cs" />
+    <Compile Include="Dtos\SubjectDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -398,6 +398,10 @@
     <Compile Include="Migrations\201901052344131_UpdatePolaganje.cs" />
     <Compile Include="Migrations\201901052344131_UpdatePolaganje.Designer.cs">
       <DependentUpon>201901052344131_UpdatePolaganje.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102021840235_UpdateEntireModel.cs" />
+    <Compile Include="Migrations\202102021840235_UpdateEntireModel.Designer.cs">
+      <DependentUpon>202102021840235_UpdateEntireModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -701,16 +705,16 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Predmeti\Index.cshtml" />
-    <Content Include="Views\Predmeti\NoviPredmet.cshtml" />
-    <Content Include="Views\Ispiti\Index.cshtml" />
-    <Content Include="Views\Ispiti\IspitiForm.cshtml" />
+    <Content Include="Views\Predmeti\NewSubject.cshtml" />
+    <Content Include="Views\Exam\Index.cshtml" />
+    <Content Include="Views\Exam\NewExam.cshtml" />
     <Content Include="Views\Polaganje\Index.cshtml" />
-    <Content Include="Views\Polaganje\NovoPolaganje.cshtml" />
-    <Content Include="Views\Polaganje\IzmeniPolaganje.cshtml" />
+    <Content Include="Views\Polaganje\NewExamResult.cshtml" />
+    <Content Include="Views\Polaganje\Edit.cshtml" />
     <Content Include="Views\Home\Studenti.cshtml" />
-    <Content Include="Views\Polaganje\IspitiStudenta.cshtml" />
+    <Content Include="Views\Polaganje\StudentExams.cshtml" />
     <Content Include="Views\Home\Profesori.cshtml" />
-    <Content Include="Views\Polaganje\PolozeniIspitiKodProfesora.cshtml" />
+    <Content Include="Views\Polaganje\PassedExamsByProfessor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -758,6 +762,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901052344131_UpdatePolaganje.resx">
       <DependentUpon>201901052344131_UpdatePolaganje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102021840235_UpdateEntireModel.resx">
+      <DependentUpon>202102021840235_UpdateEntireModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

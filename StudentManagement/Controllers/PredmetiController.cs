@@ -1,10 +1,7 @@
 ﻿using StudentManagement.Models;
 using StudentManagement.ViewModels;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace StudentManagement.Controllers
@@ -22,69 +19,57 @@ namespace StudentManagement.Controllers
         {
             _context.Dispose();
         }
-        // GET: Predmet
+        // GET: Subject
         [Authorize(Roles = "Profesor, Administrator")]
         public ViewResult Index()
         {
-            var predmeti = _context.predmeti.Include(u => u.user).ToList();
-            return View(predmeti);
+            var Subjects = _context.Subjects.Include(u => u.User).ToList();
+            return View(Subjects);
         }
         [Authorize(Roles = "Administrator")]
-        public ActionResult NoviPredmet(Predmet predmet)
+        public ActionResult NewSubject(Subject predmet)
         {
-
-            //var getRole = _context.Roles.Where(r => r.Name == "Profesor").Select(m => m.Id).SingleOrDefault();
-
             var users = _context.Users.Where(u => u.Roles.Any(r => r.RoleId == getRole)).ToList();
-
-            //var predmeti = _context.predmeti.Include(u => users).ToList();
-
-           // var users = _context.Users.ToList();
             
             var viewModel = new PredmetFormViewModel
             {
-                //ispit = new Ispit(),
-                applicationUsers = users
+                ApplicationUsers = users
             };
-            return View("NoviPredmet", viewModel);
-
-
+            return View(viewModel);
         }
       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Sacuvaj(Predmet predmet)
+        public ActionResult Save(Subject predmet)
         {
             if (!ModelState.IsValid)
             {
                 var viewModel = new PredmetFormViewModel(predmet)
                 {
-                    applicationUsers = _context.Users.ToList()
+                    ApplicationUsers = _context.Users.ToList()
                 };
                 return View("NoviPredmet", viewModel);
             }
 
-            if (predmet.id == 0)
+            if (predmet.Id == 0)
             {
-                _context.predmeti.Add(predmet);
+                _context.Subjects.Add(predmet);
             }
             else
             {
-                var ispitUBazi = _context.predmeti.Single(i => i.id == predmet.id);
-                ispitUBazi.naziv = predmet.naziv;
-                ispitUBazi.espb = predmet.espb;
-                ispitUBazi.userId = predmet.userId;
+                var ispitUBazi = _context.Subjects.Single(i => i.Id == predmet.Id);
+                ispitUBazi.Name = predmet.Name;
+                ispitUBazi.Espb = predmet.Espb;
+                ispitUBazi.UserId = predmet.UserId;
             }
             _context.SaveChanges();
             return RedirectToAction("Index", "Predmeti");
         }
+
         [Authorize(Roles = "Administrator")]
-        public ActionResult Izmeni(int id)
+        public ActionResult Edit(int id)
         {
-            var predmet = _context.predmeti.SingleOrDefault(p => p.id == id);
-
-
-            //var getRole = _context.Roles.Where(r => r.Name == "Profesor").Select(m => m.Id).SingleOrDefault();
+            var predmet = _context.Subjects.SingleOrDefault(p => p.Id == id);
 
             var users = _context.Users.Where(u => u.Roles.Any(r => r.RoleId == getRole)).ToList();
 
@@ -94,25 +79,10 @@ namespace StudentManagement.Controllers
             }
             var viewModel = new PredmetFormViewModel(predmet)
             {
-                //ispit = ispit,
-                //applicationUsers = _context.Users.ToList()
-                applicationUsers = users
+                ApplicationUsers = users
             };
             return View("NoviPredmet", viewModel);
         }
-
-        //public ActionResult Obrisi(int id)
-        //{
-        //    var predmet = _context.predmeti.SingleOrDefault(p => p.id == id);
-
-        //    if (predmet == null)
-        //        return HttpNotFound();
-
-        //    _context.predmeti.Remove(predmet);
-        //    _context.SaveChanges();
-
-        //    return RedirectToAction("Index", "Predmeti");
-        //}
 
     }
 }

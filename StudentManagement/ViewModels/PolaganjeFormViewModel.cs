@@ -1,9 +1,6 @@
 ﻿using StudentManagement.Models;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace StudentManagement.ViewModels
 {
@@ -11,50 +8,47 @@ namespace StudentManagement.ViewModels
     {
 
         [Display(Name = "Studenti")]
-        public IEnumerable<ApplicationUser> studenti { get; set; }
+        public IEnumerable<ApplicationUser> Students { get; set; }
         [Display(Name = "Ispiti")]
-        public IEnumerable<Ispit> ispiti { get; set; }
-        public int id { get; set; }
+        public IEnumerable<Exam> Exams { get; set; }
+        public int Id { get; set; }
         [Display(Name = "Ocena")]
         [Range(5, 10)]
-        public int? ocena { get; set; }
+        public int? Grade { get; set; }
         [Display(Name = "Broj bodova")]
-        public int? brojBodova { get; set; }
+        public int? Score { get; set; }
         [Display(Name = "Broj pokusaja")]
-        public int? brojPokusaja { get; set; }
+        public int? NumberOfAttampts { get; set; }
         [Display(Name = "Polozio")]
-        public bool? polozio { get; set; }
+        public bool? Passed { get; set; }
         [Required]
         [Display(Name = "Email studenta")]
-        public string studentId { get; set; }
+        public string StudentId { get; set; }
         [Required]
         [Display(Name = "Ispit")]
-        public int? ispitId { get; set; }
-
-
-       
+        public int? ExamId { get; set; }
 
         public PolaganjeFormViewModel()
         {
-            id = 0;
+            Id = 0;
         }
 
-        public PolaganjeFormViewModel(Polaganje polaganje)
+        public PolaganjeFormViewModel(ExamResult polaganje)
         {
-            id = polaganje.id;
-            ocena = polaganje.ocena;
-            brojBodova = polaganje.brojBodova;
-            brojPokusaja = polaganje.brojPokusaja;
-            polozio = polaganje.polozio;
-            studentId = polaganje.studentId;
-            ispitId = polaganje.ispitId;
+            Id = polaganje.Id;
+            Grade = polaganje.Grade;
+            Score = polaganje.Score;
+            NumberOfAttampts = polaganje.NumberOfAttempts;
+            Passed = polaganje.Passed;
+            StudentId = polaganje.StudentId;
+            ExamId = polaganje.ExamId;
         }
 
         public string Title
         {
             get
             {
-                return id != 0 ? "Izmeni polaganje" : "Novo polaganje";
+                return Id != 0 ? "Izmeni polaganje" : "Novo polaganje";
             }
         }
     }

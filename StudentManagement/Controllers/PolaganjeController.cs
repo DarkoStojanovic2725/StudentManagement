@@ -1,9 +1,7 @@
 ﻿ using StudentManagement.Models;
 using System;
 using System.Data.Entity;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using StudentManagement.ViewModels;
 using System.Data.Entity.Validation;
@@ -25,102 +23,104 @@ namespace StudentManagement.Controllers
             _context.Dispose();  
         }
 
-
-        // GET: Polaganje
+        // GET: ExamResult
         [Authorize(Roles = "Profesor, Administrator")]
         public ViewResult Index()
         {
 
-            var polaganja = _context.polaganja
-                .Include(s => s.student)
-                .Include(p => p.ispit)
-                .Include(c => c.ispit.predmet)
+            var examResults = _context.ExamResults
+                .Include(s => s.Student)
+                .Include(p => p.Exam)
+                .Include(c => c.Exam.Subject)
                 .ToList();
 
-            return View(polaganja);
+            return View(examResults);
         }
+
         [Authorize(Roles = "Profesor, Administrator")]
-        public ActionResult IspitiStudenta(string idStudenta) {
-            if (idStudenta == null)
+        public ActionResult StudentExams(string studentId) {
+            if (studentId == null)
                 return HttpNotFound();
 
-            var ispiti = _context.polaganja
-                .Include(s => s.student)
-                .Include(p => p.ispit)
-                .Include(c => c.ispit.predmet)
-                .Where(p => p.studentId == idStudenta).ToList();
+            var ispiti = _context.ExamResults
+                .Include(s => s.Student)
+                .Include(p => p.Exam)
+                .Include(c => c.Exam.Subject)
+                .Where(p => p.StudentId == studentId).ToList();
 
-            var brojPolozenihIspita = _context.polaganja
-                .Include(s => s.student)
-                .Where(s => s.studentId == idStudenta && s.ocena > 5).Count();
+            var brojPolozenihIspita = _context.ExamResults
+                .Include(s => s.Student)
+                .Where(s => s.StudentId == studentId && s.Grade > 5).Count();
 
             ViewBag.BrojPolozenih = brojPolozenihIspita;
 
             return View(ispiti);
         }
+
         [Authorize(Roles = "Student")]
-        public ActionResult NovoPolaganje() {
+        public ActionResult NewExamResult() {
 
             var user = HttpContext.User.Identity.Name;
-            var studenti = _context.Users
+            var students = _context.Users
                 .Where(u => u.Roles.Any(r => r.RoleId == getRole) && u.Email == user)
                 .ToList();
-            var ispiti = _context.ispiti
-                .Include(p => p.predmet)
+            var exams = _context.Exams
+                .Include(p => p.Subject)
                 .ToList();
 
             var viewModel = new PolaganjeFormViewModel {
-                studenti = studenti,
-                ispiti = ispiti
+                Students = students,
+                Exams = exams
             };
 
-            return View("NovoPolaganje", viewModel);
+            return View(viewModel);
         }
+
         [Authorize(Roles = "Profesor, Administrator")]
-        public ActionResult PolozeniIspitiKodProfesora(string idProfesora) {
+        public ActionResult PassedExamsByProfessor(string idProfesora) {
             if (idProfesora == null)
                 return HttpNotFound();
-            var ispiti = _context.polaganja
-                .Include(s => s.student)
-                .Include(p => p.ispit)
-                .Include(c => c.ispit.predmet)
-                .Where(p => p.ocena > 5 && p.ispit.predmet.userId == idProfesora)
+            var exams = _context.ExamResults
+                .Include(s => s.Student)
+                .Include(p => p.Exam)
+                .Include(c => c.Exam.Subject)
+                .Where(p => p.Grade > 5 && p.Exam.Subject.UserId == idProfesora)
                 .ToList();
 
-            var profesor = _context.Users.SingleOrDefault(p => p.Id == idProfesora).Email;
+            var profesor = _context.Users.SingleOrDefault(p => p.Id == idProfesora)?.Email;
 
             ViewBag.Profesor = profesor;
-            return View(ispiti);
+            return View(exams);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Sacuvaj(Polaganje polaganje) {
+        public ActionResult Save(ExamResult polaganje) {
             if (!ModelState.IsValid)
             {
                 var viewModel = new PolaganjeFormViewModel(polaganje)
                 {
                     //ispit = ispit,
-                    studenti = _context.Users.ToList(),
-                    ispiti = _context.ispiti.ToList()
+                    Students = _context.Users.ToList(),
+                    Exams = _context.Exams.ToList()
                 };
                 return View("NovoPolaganje", viewModel);
             }
-            if (polaganje.id == 0)
+            if (polaganje.Id == 0)
             {
-                _context.polaganja.Add(polaganje);
+                _context.ExamResults.Add(polaganje);
             }
             else
             {
-                var polaganjeUBazi = _context.polaganja.Single(p => p.id == polaganje.id);
-                polaganjeUBazi.ocena = polaganje.ocena;
-                polaganjeUBazi.brojBodova = polaganje.brojBodova;
-                polaganjeUBazi.brojPokusaja = polaganje.brojPokusaja;
-                polaganjeUBazi.polozio = polaganje.ocena > 5 ? true : false;
+                var polaganjeUBazi = _context.ExamResults.Single(p => p.Id == polaganje.Id);
+                polaganjeUBazi.Grade = polaganje.Grade;
+                polaganjeUBazi.Score = polaganje.Score;
+                polaganjeUBazi.NumberOfAttempts = polaganje.NumberOfAttempts;
+                polaganjeUBazi.Passed = polaganje.Grade > 5 ? true : false;
 
-                polaganjeUBazi.studentId = polaganje.studentId;
-                polaganjeUBazi.ispitId = polaganje.ispitId;
+                polaganjeUBazi.StudentId = polaganje.StudentId;
+                polaganjeUBazi.ExamId = polaganje.ExamId;
             }
             try
             {
@@ -132,15 +132,15 @@ namespace StudentManagement.Controllers
             }
 
             if(User.IsInRole("Profesor"))
-                return RedirectToAction("Index", "Polaganje");
+                return RedirectToAction("Index", "ExamResult");
 
             return RedirectToAction("Index", "Home");
 
         }
         [Authorize(Roles = "Profesor, Administrator")]
-        public ActionResult Izmeni(int id)
+        public ActionResult Edit(int id)
         {
-            var polaganje = _context.polaganja.SingleOrDefault(p => p.id == id);
+            var polaganje = _context.ExamResults.SingleOrDefault(p => p.Id == id);
 
             if (polaganje == null)
             {
@@ -148,26 +148,25 @@ namespace StudentManagement.Controllers
             }
             var viewModel = new PolaganjeFormViewModel(polaganje)
             {
-                studenti = _context.Users.ToList(),
-                ispiti = _context.ispiti.Include(p => p.predmet).ToList()
+                Students = _context.Users.ToList(),
+                Exams = _context.Exams.Include(p => p.Subject).ToList()
             };
             return View("IzmeniPolaganje", viewModel);
         }
+
         [Authorize(Roles = "Profesor, Administrator")]
-        public ActionResult Obrisi(int id)
+        public ActionResult Delete(int id)
         {
 
-            var polaganje = _context.polaganja.SingleOrDefault(p => p.id == id);
+            var polaganje = _context.ExamResults.SingleOrDefault(p => p.Id == id);
 
             if (polaganje == null)
                 return HttpNotFound();
 
-            _context.polaganja.Remove(polaganje);
+            _context.ExamResults.Remove(polaganje);
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "Polaganje");
+            return RedirectToAction("Index", "ExamResult");
         }
-
-
     }
 }

@@ -6,20 +6,20 @@ using System.Web;
 
 namespace StudentManagement.Models
 {
-    public class Predmet
+    public class Subject
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         [Required]
         [Display(Name = "Naziv predmeta")]
-        public string naziv { get; set; }
+        public string Name { get; set; }
         [Required]
         [Display(Name = "Broj ESPB bodova")]
-        public int espb { get; set; }
+        public int Espb { get; set; }
 
         [Display(Name = "Profesor")]
-        public string userId { get; set; }
+        public string UserId { get; set; }
 
-        public ApplicationUser user { get; set; }
+        public ApplicationUser User { get; set; }
 
     }
 }

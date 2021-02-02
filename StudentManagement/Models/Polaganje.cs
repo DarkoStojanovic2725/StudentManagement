@@ -1,32 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace StudentManagement.Models
 {
-    public class Polaganje
+    public class ExamResult
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         [Display(Name = "Ocena")]
         [Range(5, 10)]
-        public int? ocena { get; set; }
+        public int? Grade { get; set; }
         [Display(Name = "Broj bodova")]
-        public int? brojBodova { get; set; }
+        public int? Score { get; set; }
         [Display(Name = "Broj pokusaja")]
-        public int? brojPokusaja { get; set; }
+        public int? NumberOfAttempts { get; set; }
         [Display(Name = "Polozio")]
-        public bool? polozio { get; set; }
+        public bool? Passed { get; set; }
 
-        public ApplicationUser student { get; set; }
+        public ApplicationUser Student { get; set; }
         [Required]
         [Display(Name = "Email studenta")]
-        public string studentId { get; set; }
+        public string StudentId { get; set; }
 
-        public Ispit ispit { get; set; }
+        public Exam Exam { get; set; }
         [Required]
         [Display(Name = "Ispit")]
-        public int ispitId { get; set; }
+        public int ExamId { get; set; }
     }
 }

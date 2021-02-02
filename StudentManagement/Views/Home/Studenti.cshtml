@@ -88,7 +88,7 @@
                 var element = $(this);
                 var id = element.attr("id");
                 $.ajax({
-                    url: "/Polaganje/IspitiStudenta?idStudenta=" + id,
+                    url: "/Polaganje/StudentExams?studentId=" + id,
                     method: "post",
                     async: false,
                     data: { id: id },

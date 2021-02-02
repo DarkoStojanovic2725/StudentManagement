@@ -2,45 +2,39 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace StudentManagement.ViewModels
 {
     public class IspitFormViewModel
     {
-        public IEnumerable<Predmet> predmeti { get; set; }
+        public IEnumerable<Subject> Subjects { get; set; }
 
-        public int? id { get; set; }
+        public int? Id { get; set; }
         [Required]
         [Display(Name = "Datum Ispita")]
-        public DateTime? datumIspita { get; set; }
+        public DateTime? DateOfExam { get; set; }
         [Required]
         [Display(Name = "Naziv predmeta")]
-        public int? predmetId { get; set; }
+        public int? SubjectId { get; set; }
 
 
         public string Title {
             get
             {
-                //if (ispit != null && ispit.id != 0)
-                //{
-                //    return "Izmeni ispit";
-                //}
-                return id != 0 ? "Izmeni ispit" : "Novi ispit";
+                return Id != 0 ? "Izmeni ispit" : "Novi ispit";
             }
         }
 
         public IspitFormViewModel()
         {
-            id = 0;
+            Id = 0;
         }
 
-        public IspitFormViewModel(Ispit ispit)
+        public IspitFormViewModel(Exam ispit)
         {
-            id = ispit.id;
-            datumIspita = ispit.datumIspita;
-            predmetId = ispit.predmetId;
+            Id = ispit.Id;
+            DateOfExam = ispit.DateOfExam;
+            SubjectId = ispit.Subjectid;
         }
 
     }

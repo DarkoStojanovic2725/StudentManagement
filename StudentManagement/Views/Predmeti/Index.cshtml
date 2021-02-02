@@ -1,4 +1,4 @@
-﻿@model IEnumerable<StudentManagement.Models.Predmet>
+﻿@model IEnumerable<StudentManagement.Models.Subject>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,7 +6,7 @@
 
 <h2>Predmeti</h2>
 <p>
-    @Html.ActionLink("Novi predmet", "NoviPredmet", "Predmeti", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Novi predmet", "NewSubject", "Predmeti", null, new { @class = "btn btn-primary" })
 </p>
 @if (!Model.Any())
 {
@@ -26,13 +26,13 @@ else {
         <tbody>
             @foreach (var predmet in Model) {
                   <tr>
-                      <td>@Html.ActionLink(predmet.naziv, "Izmeni", "Predmeti", new { id = predmet.id }, null)</td>
-                      <td>@predmet.espb</td>
-                      <td>@predmet.user.Email</td>
+                      <td>@Html.ActionLink(predmet.Name, "Edit", "Predmeti", new { id = predmet.Id }, null)</td>
+                      <td>@predmet.Espb</td>
+                      <td>@predmet.User.Email</td>
                     @*  <td>@Html.ActionLink("Obrisi", "Obrisi", "Predmeti", new { id = predmet.id}, null)</td>*@
 
                       <td>
-                          <button data-predmet-id="@predmet.id" class="btn-link js-delete">Obrisi</button>
+                          <button data-predmet-id="@predmet.Id" class="btn-link js-delete">Obrisi</button>
                       </td>
                   </tr>
             }

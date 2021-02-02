@@ -10,20 +10,20 @@ namespace StudentManagement.ViewModels
     public class PredmetFormViewModel
     {
 
-        public IEnumerable<ApplicationUser> applicationUsers { get; set; }
+        public IEnumerable<ApplicationUser> ApplicationUsers { get; set; }
 
-        public int id { get; set; }
+        public int Id { get; set; }
         [Required]
         [Display(Name = "Naziv predmeta")]
-        public string naziv { get; set; }
+        public string Name { get; set; }
         [Required]
         [Display(Name = "Broj ESPB bodova")]
-        public int espb { get; set; }
+        public int Espb { get; set; }
 
         //public ApplicationUser user { get; set; }
         [Display(Name = "Profesor")]
         [Required]
-        public string userId { get; set; }
+        public string UserId { get; set; }
 
 
         public string Title
@@ -31,21 +31,21 @@ namespace StudentManagement.ViewModels
             get
             {
                
-                return id != 0 ? "Izmeni predmet" : "Novi predmet";
+                return Id != 0 ? "Izmeni predmet" : "Novi predmet";
             }
         }
 
         public PredmetFormViewModel()
         {
-            id = 0;
+            Id = 0;
         }
 
-        public PredmetFormViewModel(Predmet predmet)
+        public PredmetFormViewModel(Subject predmet)
         {
-            id = predmet.id;
-            naziv = predmet.naziv;
-            espb = predmet.espb;
-            userId = predmet.userId;
+            Id = predmet.Id;
+            Name = predmet.Name;
+            Espb = predmet.Espb;
+            UserId = predmet.UserId;
         }
     }
 }
