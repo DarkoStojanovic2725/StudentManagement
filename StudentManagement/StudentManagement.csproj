@@ -350,7 +350,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\PolaganjeController.cs" />
+    <Compile Include="Controllers\ExamResultController.cs" />
     <Compile Include="Controllers\PredmetiController.cs" />
     <Compile Include="Dtos\ExamDro.cs" />
     <Compile Include="Dtos\SubjectDto.cs" />
@@ -708,13 +708,13 @@
     <Content Include="Views\Predmeti\NewSubject.cshtml" />
     <Content Include="Views\Exam\Index.cshtml" />
     <Content Include="Views\Exam\NewExam.cshtml" />
-    <Content Include="Views\Polaganje\Index.cshtml" />
-    <Content Include="Views\Polaganje\NewExamResult.cshtml" />
-    <Content Include="Views\Polaganje\Edit.cshtml" />
+    <Content Include="Views\ExamResult\Index.cshtml" />
+    <Content Include="Views\ExamResult\NewExamResult.cshtml" />
+    <Content Include="Views\ExamResult\Edit.cshtml" />
     <Content Include="Views\Home\Studenti.cshtml" />
-    <Content Include="Views\Polaganje\StudentExams.cshtml" />
+    <Content Include="Views\ExamResult\StudentExams.cshtml" />
     <Content Include="Views\Home\Profesori.cshtml" />
-    <Content Include="Views\Polaganje\PassedExamsByProfessor.cshtml" />
+    <Content Include="Views\ExamResult\PassedExamsByProfessor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -40,9 +40,7 @@
         {
             <tr>
                 <td>
-                    @* @Html.DisplayFor(modelItem => item.Email)*@
-                    @* @Html.ActionLink(item.Email, "IspitiStudenta", "Polaganje", new { idStudenta = item.Id, @data_toggle = "popover", @data_trigger = "hover" }, null)*@
-                    <a href="#" data-toggle="popover" data-trigger="click" id="@item.Id">@item.Email</a>
+                    <a href="#" class="text-primary" data-toggle="popover" data-trigger="click" id="@item.Id">@item.Email</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.EmailConfirmed)
@@ -63,7 +61,7 @@
                     @Html.DisplayFor(modelItem => item.UserName)
                 </td>
                 <td>
-                    @Html.ActionLink("Obrisi", "Obrisi", "Home", new { id = item.Id }, null)
+                    @Html.ActionLink("Obrisi", "Obrisi", "Home", new { id = item.Id }, new {@class = "text-primary"})
                 </td>
             </tr>
         }

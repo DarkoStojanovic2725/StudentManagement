@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,14 +27,14 @@
                     @if (User.IsInRole("Administrator") || User.IsInRole("Profesor"))
                     {
                     <li>@Html.ActionLink("Predmeti", "Index", "Predmeti")</li>
-                    <li>@Html.ActionLink("Ispiti", "Index", "Ispiti")</li>
-                    <li>@Html.ActionLink("Polaganja", "Index", "Polaganje")</li>
+                    <li>@Html.ActionLink("Ispiti", "Index", "Exam")</li>
+                    <li>@Html.ActionLink("Polaganja", "Index", "ExamResult")</li>
                     <li>@Html.ActionLink("Studenti", "Studenti", "Home")</li>
                     <li>@Html.ActionLink("Profesori", "Profesori", "Home")</li>
                     }
                     @if (User.IsInRole("Student"))
                     {
-                        <li>@Html.ActionLink("Prijavi ispit", "NovoPolaganje", "Polaganje")</li>
+                        <li>@Html.ActionLink("Prijavi ispit", "NewExamResult", "ExamResult")</li>
                     }
 
                 </ul>

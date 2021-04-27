@@ -71,7 +71,10 @@ namespace StudentManagement
                             BackoffPeriod = TimeSpan.FromSeconds(30),
                             Timeout = TimeSpan.FromSeconds(3)
                         },
-                        InfluxDbSettings = new InfluxDBSettings("StudentManagementMetrics", new Uri("http://127.0.0.1:8086")),
+                        InfluxDbSettings = new InfluxDBSettings("StudentManagementMetrics", new Uri("http://127.0.0.1:8086"))
+                        {
+                            
+                        },
                         ReportInterval = TimeSpan.FromSeconds(5)
                     });
 
@@ -80,6 +83,7 @@ namespace StudentManagement
                         ReportInterval = TimeSpan.FromSeconds(30),
                         FileName = @"C:\metrics\StudentManagementMetrics.txt"
                     });
+
                 })
                 .AddHealthChecks(factory =>
                 {

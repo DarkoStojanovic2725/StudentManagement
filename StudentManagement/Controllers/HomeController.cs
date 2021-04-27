@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using App.Metrics;
+using App.Metrics.Core.Options;
 
 namespace StudentManagement.Controllers
 {
@@ -12,9 +14,12 @@ namespace StudentManagement.Controllers
 
         private ApplicationDbContext _context;
         private string getRole;
-        public HomeController()
+        //private readonly IMetrics _metrics;
+
+        public HomeController(/*IMetrics metrics*/)
         {
             _context = new ApplicationDbContext();
+            //_metrics = metrics;
             getRole = _context.Roles.Where(r => r.Name == "Student").Select(m => m.Id).SingleOrDefault();
         }
         protected override void Dispose(bool disposing)
@@ -25,6 +30,11 @@ namespace StudentManagement.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
+            //_metrics.Measure.Counter.Increment(new CounterOptions
+            //{
+            //    Name = "HomeIndexCounter"
+            //});
+
             return View();
         }
 

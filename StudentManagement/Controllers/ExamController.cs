@@ -46,7 +46,7 @@ namespace StudentManagement.Controllers
                 {
                     Subjects = _context.Subjects.ToList()
                 };
-                return View("IspitiForm", viewModel);
+                return View("NewExam", viewModel);
             }
             if (ispit.Id == 0)
             {
@@ -59,7 +59,7 @@ namespace StudentManagement.Controllers
                 ispitUBazi.Subjectid = ispit.Subjectid;
             }
             _context.SaveChanges();
-            return RedirectToAction("Index", "Ispiti");
+            return RedirectToAction("Index", "Exam");
         }
 
         [Authorize(Roles = "Profesor, Administrator")]
@@ -75,7 +75,7 @@ namespace StudentManagement.Controllers
                 //ispit = ispit,
                 Subjects = _context.Subjects.ToList()
             };
-            return View("IspitiForm", viewModel);
+            return View("NewExam", viewModel);
         }
     }
 }
