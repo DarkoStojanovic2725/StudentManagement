@@ -344,4 +344,3 @@ C:\Users\Darko\Documents\GitHub\StudentManagement\StudentManagement\bin\Serilog.
 C:\Users\Darko\Documents\GitHub\StudentManagement\StudentManagement\bin\Serilog.Sinks.RollingFile.xml
 C:\Users\Darko\Documents\GitHub\StudentManagement\StudentManagement\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Darko\Documents\GitHub\StudentManagement\StudentManagement\obj\Debug\StudentManagement.Migrations.UpdateEntireModel.resources
-C:\Users\Darko\Documents\GitHub\StudentManagement\StudentManagement\obj\Debug\StudentManagement.csprojAssemblyReference.cache

@@ -20,20 +20,20 @@ namespace StudentManagement.Controllers.Api
         //GET api/GetExams
         public IHttpActionResult GetExams()
         {
-            var ispitiDtos = _context.Exams.Include(i => i.Subject)
+            var examDtos = _context.Exams.Include(i => i.Subject)
                 .ToList()
                 .Select(Mapper.Map<Exam, ExamDto>);
-            return Ok(ispitiDtos);
+            return Ok(examDtos);
         }
 
         public IHttpActionResult GetExam(int id)
         {
-            var ispit = _context.Exams.Include(i => i.Subject).FirstOrDefault(i => i.Id == id);
+            var exam = _context.Exams.Include(i => i.Subject).FirstOrDefault(i => i.Id == id);
 
-            if (ispit == null)
+            if (exam == null)
                 return NotFound();
 
-            return Ok(Mapper.Map<Exam, ExamDto>(ispit));
+            return Ok(Mapper.Map<Exam, ExamDto>(exam));
         }
 
         //POST /api/ispiti
@@ -45,13 +45,13 @@ namespace StudentManagement.Controllers.Api
                 return BadRequest();
             }
 
-            var ispit = Mapper.Map<ExamDto, Exam>(ispitDto);
-            _context.Exams.Add(ispit);
+            var exam = Mapper.Map<ExamDto, Exam>(ispitDto);
+            _context.Exams.Add(exam);
             _context.SaveChanges();
 
-            ispitDto.Id = ispit.Id;
+            ispitDto.Id = exam.Id;
 
-            return Created(new Uri(Request.RequestUri + "/" + ispit.Id), ispitDto);
+            return Created(new Uri(Request.RequestUri + "/" + exam.Id), ispitDto);
         }
 
         [HttpPut]
@@ -75,12 +75,12 @@ namespace StudentManagement.Controllers.Api
         [HttpDelete]
         public IHttpActionResult DeleteExam(int id)
         {
-            var ispitUBazi = _context.Exams.FirstOrDefault(i => i.Id == id);
+            var existingExam = _context.Exams.FirstOrDefault(i => i.Id == id);
 
-            if (ispitUBazi == null)
+            if (existingExam == null)
                 throw new HttpResponseException(System.Net.HttpStatusCode.NotFound);
 
-            _context.Exams.Remove(ispitUBazi);
+            _context.Exams.Remove(existingExam);
             _context.SaveChanges();
 
             return Ok();

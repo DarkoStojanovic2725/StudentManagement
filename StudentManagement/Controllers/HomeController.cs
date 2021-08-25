@@ -1,11 +1,6 @@
 ﻿using StudentManagement.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using App.Metrics;
-using App.Metrics.Core.Options;
 
 namespace StudentManagement.Controllers
 {
@@ -47,27 +42,27 @@ namespace StudentManagement.Controllers
         }
 
         [Authorize(Roles = "Profesor, Administrator")]
-        public ActionResult Studenti() {
+        public ActionResult Students() {
 
-            var studenti = _context
+            var students = _context
                 .Users
                 .Where(u => u.Roles.Any(r => r.RoleId == getRole))
                 .ToList();
 
-            return View(studenti);
+            return View(students);
         }
 
         [Authorize(Roles = "Administrator, Profesor")]
-        public ActionResult Profesori()
+        public ActionResult Professors()
         {
             var roleProf = _context.Roles.Where(r => r.Name == "Profesor").Select(m => m.Id).SingleOrDefault();
 
-            var profesori = _context
+            var professors = _context
                 .Users
                 .Where(u => u.Roles.Any(r => r.RoleId == roleProf))
                 .ToList();
 
-            return View(profesori);
+            return View(professors);
         }
         [AllowAnonymous]
         public ActionResult Contact()
@@ -77,7 +72,7 @@ namespace StudentManagement.Controllers
             return View();
         }
         [Authorize(Roles = "Administrator")]
-        public ActionResult Obrisi(string id)
+        public ActionResult Delete(string id)
         {
 
             var student = _context.Users.SingleOrDefault(p => p.Id == id);

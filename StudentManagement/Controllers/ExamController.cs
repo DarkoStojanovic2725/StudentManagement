@@ -22,41 +22,41 @@ namespace StudentManagement.Controllers
         [Authorize(Roles = "Profesor, Administrator")]
         public ViewResult Index()
         {
-            var ispiti = _context.Exams.Include(i => i.Subject).ToList();
-            return View(ispiti);
+            var exams = _context.Exams.Include(i => i.Subject).ToList();
+            return View(exams);
         }
         [Authorize(Roles = "Profesor, Administrator")]
         public ActionResult NewExam()
         {
-            var Subjects = _context.Subjects.ToList();
-            var viewModel = new IspitFormViewModel {
+            var subjects = _context.Subjects.ToList();
+            var viewModel = new ExamFormViewModel {
                   //ispit = new Ispit(),
-                  Subjects = Subjects
+                  Subjects = subjects
             };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save(Exam ispit)
+        public ActionResult Save(Exam exam)
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new IspitFormViewModel(ispit)
+                var viewModel = new ExamFormViewModel(exam)
                 {
                     Subjects = _context.Subjects.ToList()
                 };
                 return View("NewExam", viewModel);
             }
-            if (ispit.Id == 0)
+            if (exam.Id == 0)
             {
-                _context.Exams.Add(ispit);
+                _context.Exams.Add(exam);
             }
             else
             {
-                var ispitUBazi = _context.Exams.Single(i => i.Id == ispit.Id);
-                ispitUBazi.DateOfExam = ispit.DateOfExam;
-                ispitUBazi.Subjectid = ispit.Subjectid;
+                var existingExam = _context.Exams.Single(i => i.Id == exam.Id);
+                existingExam.DateOfExam = exam.DateOfExam;
+                existingExam.Subjectid = exam.Subjectid;
             }
             _context.SaveChanges();
             return RedirectToAction("Index", "Exam");
@@ -65,13 +65,13 @@ namespace StudentManagement.Controllers
         [Authorize(Roles = "Profesor, Administrator")]
         public ActionResult Edit(int id)
         {
-            var ispit = _context.Exams.SingleOrDefault(i => i.Id == id);
+            var exam = _context.Exams.SingleOrDefault(i => i.Id == id);
 
-            if (ispit == null)
+            if (exam == null)
             {
                 return HttpNotFound();
             }
-            var viewModel = new IspitFormViewModel(ispit) {
+            var viewModel = new ExamFormViewModel(exam) {
                 //ispit = ispit,
                 Subjects = _context.Subjects.ToList()
             };

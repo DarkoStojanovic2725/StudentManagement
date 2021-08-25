@@ -44,6 +44,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="App.Metrics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\App.Metrics.1.0.0-rc1\lib\net452\App.Metrics.dll</HintPath>
@@ -346,12 +350,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\ExamController.cs" />
-    <Compile Include="Controllers\Api\PredmetiController.cs" />
+    <Compile Include="Controllers\Api\SubjectsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ExamResultController.cs" />
-    <Compile Include="Controllers\PredmetiController.cs" />
+    <Compile Include="Controllers\SubjectsController.cs" />
     <Compile Include="Dtos\ExamDro.cs" />
     <Compile Include="Dtos\SubjectDto.cs" />
     <Compile Include="Global.asax.cs">
@@ -412,9 +416,9 @@
     <Compile Include="Models\Predmet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\IspitFormViewModel.cs" />
-    <Compile Include="ViewModels\PolaganjeFormViewModel.cs" />
-    <Compile Include="ViewModels\PredmetFormViewModel.cs" />
+    <Compile Include="ViewModels\ExamFormViewModel.cs" />
+    <Compile Include="ViewModels\ExamResultFormViewModel.cs" />
+    <Compile Include="ViewModels\SubjectFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-datetimepicker.css" />
@@ -704,16 +708,16 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Predmeti\Index.cshtml" />
-    <Content Include="Views\Predmeti\NewSubject.cshtml" />
+    <Content Include="Views\Subjects\Index.cshtml" />
+    <Content Include="Views\Subjects\NewSubject.cshtml" />
     <Content Include="Views\Exam\Index.cshtml" />
     <Content Include="Views\Exam\NewExam.cshtml" />
     <Content Include="Views\ExamResult\Index.cshtml" />
     <Content Include="Views\ExamResult\NewExamResult.cshtml" />
     <Content Include="Views\ExamResult\Edit.cshtml" />
-    <Content Include="Views\Home\Studenti.cshtml" />
+    <Content Include="Views\Home\Students.cshtml" />
     <Content Include="Views\ExamResult\StudentExams.cshtml" />
-    <Content Include="Views\Home\Profesori.cshtml" />
+    <Content Include="Views\Home\Professors.cshtml" />
     <Content Include="Views\ExamResult\PassedExamsByProfessor.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -68,7 +68,7 @@ namespace StudentManagement.Controllers
                 .Include(p => p.Subject)
                 .ToList();
 
-            var viewModel = new PolaganjeFormViewModel {
+            var viewModel = new ExamResultFormViewModel {
                 Students = students,
                 Exams = exams
             };
@@ -99,7 +99,7 @@ namespace StudentManagement.Controllers
         public ActionResult Save(ExamResult polaganje) {
             if (!ModelState.IsValid)
             {
-                var viewModel = new PolaganjeFormViewModel(polaganje)
+                var viewModel = new ExamResultFormViewModel(polaganje)
                 {
                     //ispit = ispit,
                     Students = _context.Users.ToList(),
@@ -146,7 +146,7 @@ namespace StudentManagement.Controllers
             {
                 return HttpNotFound();
             }
-            var viewModel = new PolaganjeFormViewModel(polaganje)
+            var viewModel = new ExamResultFormViewModel(polaganje)
             {
                 Students = _context.Users.ToList(),
                 Exams = _context.Exams.Include(p => p.Subject).ToList()

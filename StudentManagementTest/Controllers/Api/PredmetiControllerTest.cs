@@ -17,7 +17,7 @@ namespace StudentManagementTest.Controllers.Api
            
             Mapper.CreateMap<Subject, SubjectDto>();
 
-            var controller = new PredmetiController();
+            var controller = new SubjectsController();
 
             var result = controller.GetSubject(23) as OkNegotiatedContentResult<SubjectDto>;
             Assert.IsNotNull(result);
@@ -30,7 +30,7 @@ namespace StudentManagementTest.Controllers.Api
            
             Mapper.CreateMap<Subject, SubjectDto>();
 
-            var controller = new PredmetiController();
+            var controller = new SubjectsController();
 
             var result = controller.GetSubject(45);
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));

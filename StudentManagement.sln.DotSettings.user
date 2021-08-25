@@ -1,0 +1,5 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
+  &lt;Assembly Path="C:\Users\Darko\Documents\GitHub\StudentManagement\packages\AutoMapper.4.1.0\lib\net45\AutoMapper.dll" /&gt;&#xD;
+  &lt;PhysicalFolder Path="C:\Users\Darko\Desktop\AutoMapper pdb\AutoMapper.pdb\8c8066ef8b344c27b54408c0ca6bad2b1" Loaded="True" /&gt;&#xD;
+&lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>

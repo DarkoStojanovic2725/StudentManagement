@@ -6,7 +6,7 @@
 
 <h2>Polaganja</h2>
 <p>
-    @Html.ActionLink("Novo polaganje", "NewExamResult", "Polaganje", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Novo polaganje", "NewExamResult", "ExamResult", null, new { @class = "btn btn-primary" })
 </p>
 @if (!Model.Any())
 {
@@ -35,14 +35,14 @@ else
                     <td>@polaganje.NumberOfAttempts</td>
                     <td>@polaganje.Score</td>
                     <td>@polaganje.Passed</td>
-                    <td>@Html.ActionLink(polaganje.Student.Email, "Edit", "Polaganje", new { id = polaganje.Id }, null)</td>
+                    <td>@Html.ActionLink(polaganje.Student.Email, "Edit", "ExamResult", new { id = polaganje.Id }, null)</td>
                     <td>@polaganje.Exam.Subject.Name</td>
                     <td>@polaganje.Exam.DateOfExam</td>
 
                     @*<td>
                         <button data-ispit-id="@polaganje.id" class="btn-link js-delete">Obrisi</button>
                     </td>*@
-                    <td>@Html.ActionLink("Obrisi", "Delete", "Polaganje", new { id = polaganje.Id }, null)</td>
+                    <td>@Html.ActionLink("Obrisi", "Delete", "ExamResult", new { id = polaganje.Id }, null)</td>
                 </tr>
             }
         </tbody>
