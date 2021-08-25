@@ -1,8 +1,5 @@
 ﻿using StudentManagement.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace StudentManagement.Controllers
@@ -12,9 +9,12 @@ namespace StudentManagement.Controllers
 
         private ApplicationDbContext _context;
         private string getRole;
-        public HomeController()
+        //private readonly IMetrics _metrics;
+
+        public HomeController(/*IMetrics metrics*/)
         {
             _context = new ApplicationDbContext();
+            //_metrics = metrics;
             getRole = _context.Roles.Where(r => r.Name == "Student").Select(m => m.Id).SingleOrDefault();
         }
         protected override void Dispose(bool disposing)
@@ -25,6 +25,11 @@ namespace StudentManagement.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
+            //_metrics.Measure.Counter.Increment(new CounterOptions
+            //{
+            //    Name = "HomeIndexCounter"
+            //});
+
             return View();
         }
 
@@ -37,27 +42,27 @@ namespace StudentManagement.Controllers
         }
 
         [Authorize(Roles = "Profesor, Administrator")]
-        public ActionResult Studenti() {
+        public ActionResult Students() {
 
-            var studenti = _context
+            var students = _context
                 .Users
                 .Where(u => u.Roles.Any(r => r.RoleId == getRole))
                 .ToList();
 
-            return View(studenti);
+            return View(students);
         }
 
         [Authorize(Roles = "Administrator, Profesor")]
-        public ActionResult Profesori()
+        public ActionResult Professors()
         {
             var roleProf = _context.Roles.Where(r => r.Name == "Profesor").Select(m => m.Id).SingleOrDefault();
 
-            var profesori = _context
+            var professors = _context
                 .Users
                 .Where(u => u.Roles.Any(r => r.RoleId == roleProf))
                 .ToList();
 
-            return View(profesori);
+            return View(professors);
         }
         [AllowAnonymous]
         public ActionResult Contact()
@@ -67,7 +72,7 @@ namespace StudentManagement.Controllers
             return View();
         }
         [Authorize(Roles = "Administrator")]
-        public ActionResult Obrisi(string id)
+        public ActionResult Delete(string id)
         {
 
             var student = _context.Users.SingleOrDefault(p => p.Id == id);

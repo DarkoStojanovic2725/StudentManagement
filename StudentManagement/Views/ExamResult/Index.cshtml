@@ -1,0 +1,76 @@
+﻿@model IEnumerable<StudentManagement.Models.ExamResult>
+@{
+    ViewBag.Title = "Polaganja";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Polaganja</h2>
+<p>
+    @Html.ActionLink("Novo polaganje", "NewExamResult", "ExamResult", null, new { @class = "btn btn-primary" })
+</p>
+@if (!Model.Any())
+{
+    <p>Nema polaganja!</p>
+}
+else
+{
+    <table id="polaganja" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Ocena</th>
+                <th>Broj pokusaja</th>
+                <th>Broj bodova</th>
+                <td>Polozio?</td>
+                <td>Student</td>
+                <td>Naziv predmeta</td>
+                <td>Datum ispita</td>
+                <th>Brisanje</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var polaganje in Model)
+            {
+                <tr> 
+                    <td>@polaganje.Grade</td>
+                    <td>@polaganje.NumberOfAttempts</td>
+                    <td>@polaganje.Score</td>
+                    <td>@polaganje.Passed</td>
+                    <td>@Html.ActionLink(polaganje.Student.Email, "Edit", "ExamResult", new { id = polaganje.Id }, null)</td>
+                    <td>@polaganje.Exam.Subject.Name</td>
+                    <td>@polaganje.Exam.DateOfExam</td>
+
+                    @*<td>
+                        <button data-ispit-id="@polaganje.id" class="btn-link js-delete">Obrisi</button>
+                    </td>*@
+                    <td>@Html.ActionLink("Obrisi", "Delete", "ExamResult", new { id = polaganje.Id }, null)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $("#polaganja").DataTable();
+
+            //$("#polaganja").on("click", ".js-delete", function () {
+            //    var btn = $(this);
+            //    bootbox.confirm("Brisanjem predmeta obrisacete i ispite vezane za predmet, obrisi?", function (result) {
+            //        if (result) {
+            //            $.ajax({
+            //                url: "/api/ispiti/" + btn.attr("data-ispit-id"),
+            //                method: "DELETE",
+            //                success: function () {
+            //                    console.log("uspesno");
+            //                    btn.parents("tr").remove();
+            //                }
+            //            });
+            //        }
+            //    });
+            //});
+        });
+    </script>
+}
+
+

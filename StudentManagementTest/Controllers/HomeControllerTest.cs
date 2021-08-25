@@ -67,7 +67,7 @@ namespace StudentManagementTest.Controllers
         {
             HomeController controller = new HomeController();
 
-            ViewResult result = controller.Profesori() as ViewResult;
+            ViewResult result = controller.Professors() as ViewResult;
 
             Assert.IsNotNull(result);
 

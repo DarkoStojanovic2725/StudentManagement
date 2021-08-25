@@ -3,11 +3,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StudentManagement.Controllers.Api;
 using StudentManagement.Dtos;
 using StudentManagement.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http.Results;
 
 namespace StudentManagementTest.Controllers.Api
@@ -20,24 +15,24 @@ namespace StudentManagementTest.Controllers.Api
         {
 
            
-            Mapper.CreateMap<Predmet, PredmetDto>();
+            Mapper.CreateMap<Subject, SubjectDto>();
 
-            var controller = new PredmetiController();
+            var controller = new SubjectsController();
 
-            var result = controller.getPredmet(23) as OkNegotiatedContentResult<PredmetDto>;
+            var result = controller.GetSubject(23) as OkNegotiatedContentResult<SubjectDto>;
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.Content.naziv, "CS225");
+            Assert.AreEqual(result.Content.Name, "CS225");
         }
 
         [TestMethod]
         public void PredmetVratiNotFound()
         {
            
-            Mapper.CreateMap<Predmet, PredmetDto>();
+            Mapper.CreateMap<Subject, SubjectDto>();
 
-            var controller = new PredmetiController();
+            var controller = new SubjectsController();
 
-            var result = controller.getPredmet(45);
+            var result = controller.GetSubject(45);
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
         }
     }

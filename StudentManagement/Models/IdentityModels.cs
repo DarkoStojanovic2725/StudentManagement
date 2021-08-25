@@ -20,9 +20,9 @@ namespace StudentManagement.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Ispit> ispiti { get; set; }
-        public DbSet<Predmet> predmeti { get; set; }
-        public DbSet<Polaganje> polaganja{ get; set; }
+        public DbSet<Exam> Exams { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<ExamResult> ExamResults{ get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
